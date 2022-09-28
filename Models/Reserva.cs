@@ -7,9 +7,9 @@ namespace HospedagemHotelBootcampDIO.Models
 {
     public class Reserva
     {
-        public List<Pessoa> Hospedes { get; set; }
-        public Suite Suite { get; set; }
-        public int DiasReservados { get; set; }
+        private List<Pessoa> Hospedes { get; set; }
+        private Suite Suite { get; set; }
+        private int DiasReservados { get; set; }
 
         public Reserva(int diasReservados)
         {
@@ -18,13 +18,10 @@ namespace HospedagemHotelBootcampDIO.Models
 
         public void CadastrarHospedes(List<Pessoa> hospede)
         {
-            if (Suite == null)
+
+            if (hospede.Count > Suite.Capacidade)
             {
-                throw new Exception("Erro, a suite não foi cadastrada ainda");
-            }
-            else if (hospede.Count > Suite.Capacidade)
-            {
-                throw new Exception("Erro, não pode cadastrar doq a capacidade da suite oferece");
+                throw new Exception("Erro, não pode cadastrar mais doque a capacidade da suite oferece");
             }
             else
             {
@@ -43,7 +40,13 @@ namespace HospedagemHotelBootcampDIO.Models
 
         public decimal CalcularValorDiaria()
         {
-            return DiasReservados * Suite.ValorDiaria;
+            decimal valorDiaria = DiasReservados * Suite.ValorDiaria;
+            if (DiasReservados > 10)
+            {
+                decimal desconto = (valorDiaria * 10) / 100;
+                return valorDiaria - desconto;
+            }
+            return valorDiaria;
         }
     }
 }

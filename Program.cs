@@ -13,8 +13,8 @@ internal class Program
         listaPessoa.Add(p2);
         listaPessoa.Add(p3);
 
-        Suite suite = new Suite("Luxo", 20, 12.00M);
-        Reserva reserva = new Reserva(5);
+        Suite suite = new Suite("Luxo", 2, 10.00M);
+        Reserva reserva = new Reserva(11);
 
         reserva.CadastrarSuite(suite);
         reserva.CadastrarHospedes(listaPessoa);
